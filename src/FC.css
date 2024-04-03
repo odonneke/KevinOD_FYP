@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Raleway, sans-serif;
+}
+
+
+body#specific-page, body#specific-page html {
+    overflow: hidden;
+}
+
+body {
+    background: linear-gradient(90deg, #004f1e, #3c965e);
+}
+
+.title {
+    position: relative;
+    font-size: 40px; 
+    font-weight: 700; 
+    letter-spacing: 0px;
+
+    width: auto; 
+    text-align: center;
+    margin: auto;
+    margin-bottom: 0px; 
+    color: #ffffff; 
+    border: 2px solid #222;
+    padding: 5px 11px 3px 11px;
+    display: inline-block; 
+    white-space: nowrap; 
+    background: linear-gradient(90deg, #8c3b88, #65457e); 
+  }
+  
+  .title:before, .title:after {
+    background-color: #ffffff;
+    position: absolute;
+    content: '';
+    height: 7px;
+    width: 7px; 
+    border-radius: 50%;
+    bottom: 25px;
+  }
+  
+  .title:before {
+    left: -20px;
+  }
+  
+  .title:after {
+    right: -20px;
+  }
+  .descriptor-container {
+  background-color: #53334bdf; 
+  color: #fcfcfc; 
+  padding: 5px;
+  border-radius: 50px; 
+  box-shadow: 0 4px 8px rgba(250, 248, 248, 0.2); 
+  max-width: 80%; 
+  margin: 5px auto; 
+  display: block; 
+  text-align: center; 
+}
+
+.descriptor {
+  margin: 5px; 
+  padding: 0 10px; 
+  font-size: 1em; 
+  line-height: 1.5; 
+  overflow: visible; 
+  display: inline-block;
+  max-width: 100%; 
+}
+
+.descriptor2 {
+    margin: 5px; 
+    padding: 0 10px; 
+    font-size: 1em;
+    line-height: 1.5; 
+    overflow: visible; 
+    display: block;
+    max-width: 100%; 
+    text-align: center; 
+    font-weight: bold;
+    color: rgb(54, 5, 60); 
+    background-color: transparent;}
+
+  .container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    height: 820px;
+  }
+  
+
+.screen {
+    background: linear-gradient(90deg, #004f1e, #157b44);
+    position: relative;
+    height: 700px;
+    width: 360px;
+    box-shadow: 0px 0px 24px #186946;
+}
+
+.screen__content {
+    z-index: 1;
+    position: relative;
+    height: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+}
+
+.screen__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    clip-path: inset(0 0 0 0);
+}
+
+.screen__background__shape {
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.screen__background__shape1,
+.screen__background__shape2,
+.screen__background__shape3,
+.screen__background__shape4 {
+    background: #ffffff;
+}
+
+.screen__background__shape1 {
+    height: 420px;
+    width: 520px;
+    top: -50px;
+    right: 120px;
+    border-radius: 0 72px 0 0;
+}
+
+.screen__background__shape2 {
+    height: 220px;
+    width: 220px;
+    background: #165e3d;
+    top: -172px;
+    right: 0;
+    border-radius: 32px;
+}
+
+.screen__background__shape3 {
+    height: 540px;
+    width: 190px;
+    background: linear-gradient(270deg, #004f1e, #1b5d3f);
+    top: -24px;
+    right: 0;
+    border-radius: 32px;
+}
+
+.screen__background__shape4 {
+    height: 400px;
+    width: 200px;
+    background: #0b4024;
+    top: 420px;
+    right: 50px;
+    border-radius: 60px;
+}
+
+.form {
+    width: 100%;
+    max-width: 320px;
+}
+
+.form__field {
+    position: relative;
+    padding: 15px 0px;
+    text-align: right; 
+    padding: 10px;
+}
+
+.dietary-requirements  {
+    text-align: center; 
+    padding: 10px;
+    
+}
+
+.dietary-requirements-container {
+    background-color: #53334bb7; 
+    padding: 10px;;
+    margin: 20px 0; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+    width: calc(100% - 20px); 
+    display: flex;
+    justify-content: center;
+    margin-left: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
+.dietary-requirements {
+    padding: 5px 0;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.dietary-requirements h3 {
+    margin-bottom: 10px; 
+    text-align: center;
+    color: #fffffff7;
+    
+}
+
+.form__error {
+    position: absolute;
+    bottom: -10px;
+    width: 100%;
+    padding-top: 2px;
+    color: #ac1616; 
+    font-size: 1em; 
+    font-weight: bold; 
+    text-align: center; 
+    z-index: 10;
+  }
+
+  .form__error_weight {
+    position: absolute;
+    bottom: -25px; 
+    width: 100%;
+    padding-top: 2px;
+    color: #ac1616; 
+    font-size: 1em; 
+    font-weight: bold; 
+    text-align: center;
+    z-index: 10;
+  }
+
+
+
+.form__icon {
+    position: absolute;
+    top: 35px;
+    left: 20px;
+    color: #6b498b;
+}
+
+.form__icon1 {
+    position: absolute;
+    top: 57px;
+    left: 10px;
+    color: #6b498b;
+}
+
+.form__icon2 {
+    position: absolute;
+    top: 22px;
+
+    left: 10px;
+    color: #6b498b;
+}
+.form__icon3 {
+    position: absolute;
+    top: 26px;
+
+    left: 10px;
+    color: #6b498b;
+}
+.form__icon4 {
+    position: absolute;
+    top: 20px;
+
+    left: 10px;
+    color: #6b498b;
+}
+
+.form__input {
+    border: none;
+    border-bottom: 2px solid #0f0f0f8a;
+    background: none;
+    padding: 10px;
+    padding-left: -400px;
+    padding-right: -30px;
+    font-weight: 900;
+    width: calc(100% - 40px);
+    transition: .2s;
+}
+
+.form__input:focus,
+.form__input:hover {
+    outline: none;
+    border-bottom-color:#00000056;
+}
+
+.form__submit {
+    background: #65457e;
+    font-size: 24px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 26px;
+    border: 1px solid #266a47;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #ffffff;
+    box-shadow: 0px 2px 2px #196c44;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.form__submit:hover,
+.form__submit:focus {
+    border-color: #ffffff;
+    outline: none;
+}
+
+.button__text {
+    margin-right: 15px;
+}
+
+.button__icon {
+    font-size: 24px;
+    color: #216b38;
+}
+:root {
+    --toggle-indicator-size: 30px;
+    --track-height: calc(var(--toggle-indicator-size) + 8px);
+    --track-width: calc(var(--toggle-indicator-size) * 2.5);
+    --track-border: #000503;
+    --track-background: #ffffff;
+    --focus-ring: 2px 2px 2px 2px rgb(111, 111, 111);
+    --dark: #7B4F9D; 
+    --toggle-active: #004d40;
+    --toggle-deactive: #8a2626;
+    --dark: #8a2626;
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+  }
+
+  
+
+  label[for="vegetarian"] {
+   margin-left: 10px;
+   color: white; 
+    font-weight: bold; 
+    margin-bottom: 10px; 
+  }
+  
+  label[for="vegan"] {
+    margin-right: 34px;
+    color: white; 
+     font-weight: bold; 
+     margin-bottom: 10px; 
+  }
+
+  label[for="glutenFree"] {
+    margin-right: 30px;
+    color: white; 
+     font-weight: bold; 
+     margin-bottom: 10px; 
+  }
+
+  label[for="dairyFree"] {
+    margin-right: 2px;
+    color: white; 
+     font-weight: bold; 
+     margin-bottom: 10px; 
+  }
+  
+  
+  .toggle__input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+  
+  .toggle__input:not([disabled]):active + .toggle-track,
+  .toggle__input:not([disabled]):focus + .toggle-track {
+    border: 1px solid transparent;
+    box-shadow: var(--focus-ring);
+  }
+
+  .toggle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+  }
+  
+  
+  .toggle__input:disabled + .toggle-track {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  .toggle-track {
+    background: var(--track-background);
+    border: 1px solid var(--track-border);
+    border-radius: 100px;
+    cursor: pointer;
+    display: flex;
+    height: var(--track-height);
+    margin-right: 12px;
+    position: relative;
+    width: var(--track-width);
+  }
+  
+  .toggle-indicator {
+    align-items: center;
+    background: var(--dark);
+    border-radius: 50%;
+    bottom: 3px; 
+    display: flex;
+    height: var(--toggle-indicator-size);
+    justify-content: center;
+    left: 2px;
+    position: absolute;
+    transition: transform 0.2s;
+    width: var(--toggle-indicator-size);
+  }
+  
+  .toggle__input:checked + .toggle-track .toggle-indicator {
+    transform: translateX(calc(var(--track-width) - var(--track-height) + 4px));
+    background: var(--toggle-active);
+}
+
+
+  
