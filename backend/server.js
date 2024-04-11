@@ -525,7 +525,9 @@ app.post('/api/findIngredients', async (req, res) => {
         return;
       }
   }
-    res.json(recipes);
+    res.json({
+  recipes: recipes,
+  comments: proportioanlityComments 
   } catch (error) {
     res.status(500).json({ message: "Server failed to process request", error: error });
   }
