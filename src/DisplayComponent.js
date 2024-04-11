@@ -66,7 +66,9 @@ const DisplayComponent = () => {
         gramsOfProtein,
         maxPrice
       });
-      return matchedRecipes.data;
+       const matchedRecipes = response.data.recipes; 
+    const comments = response.data.comments; 
+    return { matchedRecipes, comments }; 
     } catch (error) {
       console.error("Error matching ingredients:", error);
       return []; //error
