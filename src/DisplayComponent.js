@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
+//last two for scroller
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingComponent from './LoadingComponent';
 import placeholderImage from './assets/placeholder.jpg';
 import './App.css';
-
-
-
 
 const DisplayComponent = () => {
   const navigate = useNavigate();
@@ -17,6 +15,10 @@ const DisplayComponent = () => {
   const [visibleRecipes, setVisibleRecipes] = useState([]);
   const [recipeCache, setRecipeCache] = useState(new Set());
   const [loading, setLoading] = useState(false);
+  const [noMoreRecipes, setNoMoreRecipes] = useState(false);
+  // Right inside your DisplayComponent function
+
+
 
   // Convert weight to kilograms if in pounds
   const weightInKg = weight ? parseFloat(weight) : 0;
@@ -93,7 +95,7 @@ const DisplayComponent = () => {
         url: 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random',
         params: { tags: generateDietaryTags(), number: '100', limitLicense: 'true' },
         headers: {
-          'X-RapidAPI-Key': process.env.REACT_APP_RAPIDAPI,
+          'X-RapidAPI-Key': process.env.REACT_APP_RAPIDAPI_KEY,
           'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
         }
       });
@@ -120,29 +122,41 @@ const DisplayComponent = () => {
   }, [processAndMatchIngredients, generateDietaryTags, recipeCache]);
 
   const loadMoreRecipes = useCallback(async () => {
-
+    const initialVisibleRecipesLength = visibleRecipes.length;
     const nextIndex = visibleRecipes.length;
     let nextRecipes = recipes.slice(nextIndex, nextIndex + 3);
-
-    // Check if there are any more recipes left to display from the current batch
+  
     if (nextRecipes.length === 0) {
-      // If no more recipes are available, fetch new recipes from the API
       await fetchRecipes();
-      // Update the nextRecipes after fetching new ones
-      nextRecipes = recipes.slice(nextIndex, nextIndex + 3);
+      // Fetching again might still return recipes already in cache, so we check if truly new recipes are added
+      nextRecipes = recipes.slice(nextIndex); 
+      nextRecipes = nextRecipes.filter(recipe => !recipeCache.has(recipe.id));
+      if (nextRecipes.length === 0) {
+        setNoMoreRecipes(true);
+        return;
+      }
     }
-    // Process and display the next set of recipes
+  
     if (nextRecipes.length > 0) {
       const processedNextRecipes = await processAndMatchIngredients(nextRecipes);
       setVisibleRecipes(prevVisibleRecipes => [...prevVisibleRecipes, ...processedNextRecipes]);
+  
+      if (visibleRecipes.length === initialVisibleRecipesLength) {
+        // No new recipes were added after processing, likely due to all being duplicates
+        setNoMoreRecipes(true);
+      } else {
+        setNoMoreRecipes(false); // New recipes were successfully loaded
+      }
     }
-  }, [recipes, visibleRecipes, processAndMatchIngredients, fetchRecipes]);
+  }, [recipes, visibleRecipes, processAndMatchIngredients, fetchRecipes, recipeCache]);
+  
 
   
 
   useEffect(() => {
     fetchRecipes();
   }, [fetchRecipes]);
+
 
   const confirmNavigation = () => {
     const userConfirmed = window.confirm("Are you sure you are ready to take the survey?");
@@ -171,6 +185,8 @@ const DisplayComponent = () => {
       {loading ? (
         <LoadingComponent />
       ) : (
+        <>
+          {visibleRecipes.length > 0 ? (
         visibleRecipes.map((recipe, index) => (
           <div key={index} className="ft-recipe">
             <div className="ft-recipe__thumb">
@@ -179,10 +195,13 @@ const DisplayComponent = () => {
             </div>
             <div className="ft-recipe__content">
               <header className="content__header">
-                <h3 className="summary-title">Recipe Summary</h3> {}
+                <h3 className="summary-title">Recipe Summary</h3> {/* Title outside the container */}
                 <div className="summary-container">
                   <p>{recipe.e} The adjusted cost of this recipe is €{recipe.totalPrice || 'Calculating...'}</p>
                 </div>
+                  <div className="comments-container">
+                      {comments && <p>{comments}</p>}
+                  </div>
                 <h3>Adjusted Recipe Macros:</h3>
                 <table className="macros-table">
                   <tbody>
@@ -275,17 +294,27 @@ const DisplayComponent = () => {
             </div>
           </div>
         ))
-      )}
+        ) : (
+          <div className="message">Recipes could not be found within your given budget. Please Return.</div>
+        )}
+
+        {noMoreRecipes && (
+          <div className="message">No more recipes could not be found within your given budget.</div>
+        )}
+      </>
+    )}
+    {visibleRecipes.length < recipes.length && (
       <button onClick={loadMoreRecipes} className="load-more">Load More</button>
-    </div>
-    <button onClick={() => navigate('/form')} className="external-link-button-top-left">
-        Back
-      </button>
-    <button onClick={confirmNavigation} className="external-link-button-top-right">
-        Survey Link
-      </button>
+    )}
   </div>
-  );
+  <button onClick={() => navigate('/form')} className="external-link-button-top-left">
+      Back
+  </button>
+  <button onClick={confirmNavigation} className="external-link-button-top-right">
+      Survey Link
+  </button>
+</div>
+);
 };
 
 export default DisplayComponent;
