@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback} from 'react';
-//last two for scroller
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingComponent from './LoadingComponent';
@@ -16,7 +15,6 @@ const DisplayComponent = () => {
   const [recipeCache, setRecipeCache] = useState(new Set());
   const [loading, setLoading] = useState(false);
   const [noMoreRecipes, setNoMoreRecipes] = useState(false);
-  // Right inside your DisplayComponent function
 
 
 
@@ -130,7 +128,6 @@ const DisplayComponent = () => {
   
     if (nextRecipes.length === 0) {
       await fetchRecipes();
-      // Fetching again might still return recipes already in cache, so we check if truly new recipes are added
       nextRecipes = recipes.slice(nextIndex); 
       nextRecipes = nextRecipes.filter(recipe => !recipeCache.has(recipe.id));
       if (nextRecipes.length === 0) {
@@ -144,7 +141,6 @@ const DisplayComponent = () => {
       setVisibleRecipes(prevVisibleRecipes => [...prevVisibleRecipes, ...processedNextRecipes]);
   
       if (visibleRecipes.length === initialVisibleRecipesLength) {
-        // No new recipes were added after processing, likely due to all being duplicates
         setNoMoreRecipes(true);
       } else {
         setNoMoreRecipes(false); // New recipes were successfully loaded
@@ -166,7 +162,6 @@ const DisplayComponent = () => {
      
       window.location.href = 'https://forms.gle/b8TfAZEz3EG5ayB1A'; 
     }
-    // If user clicked "Cancel", do nothing.
   };
 
   
@@ -248,7 +243,6 @@ const DisplayComponent = () => {
               {}
               <div className="ingredient-container">
                 {recipe.extendedIngredients && recipe.extendedIngredients.map((ingredientPair, ingIndex, arr) => {
-                  // Determine if it's the last item and the total number is odd
                   const isLastOdd = arr.length % 2 !== 0 && ingIndex === arr.length - 1;
                   return (
                     ingredientPair.matches && ingredientPair.matches.length > 0 && (
