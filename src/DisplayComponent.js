@@ -76,7 +76,7 @@ const DisplayComponent = () => {
     gramsOfFat,
     gramsOfProtein,
   maxPrice]);
-  
+  //for api call
   const generateDietaryTags = useCallback(() => {
     let tags = ['dinner', 'main dish']; // Default tags
     if (vegetarian) tags.push('vegetarian');
@@ -85,7 +85,8 @@ const DisplayComponent = () => {
     if (dairyFree) tags.push('dairy free');
     return tags.join(',');
   }, [vegetarian, vegan, glutenFree, dairyFree]);
-
+  
+  // api call
   const fetchRecipes = useCallback(async () => {
     setLoading(true);
     try {
@@ -120,7 +121,7 @@ const DisplayComponent = () => {
       setLoading(false);
     }
   }, [processAndMatchIngredients, generateDietaryTags, recipeCache]);
-
+// click more
   const loadMoreRecipes = useCallback(async () => {
     const initialVisibleRecipesLength = visibleRecipes.length;
     const nextIndex = visibleRecipes.length;
@@ -150,12 +151,12 @@ const DisplayComponent = () => {
   
 
   
-
+//init hook
   useEffect(() => {
     fetchRecipes();
   }, [fetchRecipes]);
 
-
+//to leave webapp
   const confirmNavigation = () => {
     const userConfirmed = window.confirm("Are you sure you are ready to take the survey?");
     if (userConfirmed) {
@@ -164,7 +165,7 @@ const DisplayComponent = () => {
     }
   };
 
-  
+  // for loading
   if (loading) {
     return <LoadingComponent />;
   }
@@ -173,7 +174,7 @@ const DisplayComponent = () => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
   
-
+//html return 
   return (
     <div>
     <div className="main-container">
